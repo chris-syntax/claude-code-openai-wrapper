@@ -23,6 +23,9 @@ WORKDIR /app
 # Install Python dependencies with Poetry
 RUN poetry install --no-root
 
+# Expose the SDK's bundled Claude Code CLI for interactive use (one-time /login)
+RUN ln -s "$(find /root/.cache/pypoetry/virtualenvs -type f -path '*_bundled/claude' | head -1)" /usr/local/bin/claude
+
 # Expose the port (default 8000)
 EXPOSE 8000
 
